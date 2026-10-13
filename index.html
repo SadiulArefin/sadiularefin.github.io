@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sadiul Arefin Rafi | NLP &amp; Machine Learning</title>
+  <meta name="description" content="Portfolio of Sadiul Arefin Rafi, M1 DKAI student at Université Paris-Saclay, former Adjunct Lecturer at BRAC University, working on NLP and machine learning." />
+  <meta property="og:title" content="Sadiul Arefin Rafi | NLP & Machine Learning" />
+  <meta property="og:description" content="M1 DKAI student at Université Paris-Saclay. NLP, abstractive summarization, named entity recognition." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231f4e5f'/><text x='50' y='66' font-size='46' text-anchor='middle' fill='white' font-family='Georgia,serif'>SR</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --surface: #ffffff;
+      --surface-2: #efece4;
+      --text: #1c2326;
+      --muted: #5b6669;
+      --line: #dfdbd0;
+      --accent: #1f4e5f;
+      --accent-2: #c8553d;
+      --accent-soft: #e3eef1;
+      --shadow: 0 1px 2px rgba(20,30,35,.04), 0 8px 24px rgba(20,30,35,.06);
+      --radius: 14px;
+      --maxw: 1080px;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+    :root[data-theme="dark"] {
+      --bg: #12171a;
+      --surface: #1a2125;
+      --surface-2: #222b30;
+      --text: #e7ecee;
+      --muted: #9aa8ad;
+      --line: #2c373c;
+      --accent: #7fc1d3;
+      --accent-2: #f0896f;
+      --accent-soft: #1e3640;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #12171a;
+        --surface: #1a2125;
+        --surface-2: #222b30;
+        --text: #e7ecee;
+        --muted: #9aa8ad;
+        --line: #2c373c;
+        --accent: #7fc1d3;
+        --accent-2: #f0896f;
+        --accent-soft: #1e3640;
+        --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- Nav ---------- */
+    header.nav {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--text); }
+    .brand:hover { text-decoration: none; }
+    .brand span { color: var(--accent-2); }
+    .nav-links { display: flex; gap: 4px; align-items: center; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: .9rem; font-weight: 500;
+      padding: 6px 10px; border-radius: 8px;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .icon-btn {
+      background: none; border: 1px solid var(--line); color: var(--text);
+      width: 36px; height: 36px; border-radius: 9px; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .icon-btn:hover { background: var(--surface-2); }
+    .menu-btn { display: none; }
+    @media (max-width: 860px) {
+      .menu-btn { display: inline-flex; }
+      .nav-links {
+        position: absolute; top: 64px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--bg); border-bottom: 1px solid var(--line);
+        padding: 8px 16px 16px; display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 8px; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 72px 0 56px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 260px; gap: 48px; align-items: center; }
+    .eyebrow {
+      font-family: var(--mono); font-size: .8rem; letter-spacing: .04em;
+      color: var(--accent-2); text-transform: uppercase; margin-bottom: 14px;
+    }
+    h1 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(2.3rem, 5vw, 3.6rem); line-height: 1.08; letter-spacing: -.01em;
+    }
+    .hero .lead { font-size: 1.12rem; color: var(--muted); margin-top: 18px; max-width: 58ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--surface); border: 1px solid var(--line);
+      padding: 6px 12px; border-radius: 999px; font-size: .85rem; color: var(--text);
+    }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #2fa66a; }
+    .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 10px; font-weight: 500; font-size: .95rem;
+      border: 1px solid var(--line); background: var(--surface); color: var(--text);
+    }
+    .btn:hover { text-decoration: none; border-color: var(--accent); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    .btn.primary:hover { filter: brightness(1.08); }
+    .btn svg { width: 17px; height: 17px; }
+
+    /* Photo slot */
+    .photo {
+      width: 260px; aspect-ratio: 1; border-radius: 22px; overflow: hidden;
+      position: relative; background: var(--accent-soft); border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .photo .initials {
+      position: absolute; inset: 0; display: none; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 5rem; color: var(--accent); font-weight: 600;
+    }
+    .photo.missing img { display: none; }
+    .photo.missing .initials { display: flex; }
+    .photo::after {
+      content: ""; position: absolute; inset: 0; border-radius: 22px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+      pointer-events: none;
+    }
+    .socials { display: flex; gap: 8px; margin-top: 16px; justify-content: center; }
+    .socials a {
+      width: 40px; height: 40px; border-radius: 10px; display: inline-flex;
+      align-items: center; justify-content: center;
+      background: var(--surface); border: 1px solid var(--line); color: var(--text);
+    }
+    .socials a:hover { border-color: var(--accent); color: var(--accent); }
+    .socials svg { width: 18px; height: 18px; }
+
+    @media (max-width: 760px) {
+      .hero { padding: 40px 0 32px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-side { order: -1; display: flex; flex-direction: column; align-items: flex-start; }
+      .photo { width: 140px; border-radius: 18px; }
+      .photo .initials { font-size: 2.8rem; }
+      .socials { justify-content: flex-start; }
+    }
+
+    /* ---------- Stats strip ---------- */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .stat { padding: 20px 22px; border-right: 1px solid var(--line); }
+    .stat:last-child { border-right: none; }
+    .stat .num { font-family: var(--serif); font-size: 1.9rem; font-weight: 600; color: var(--accent); line-height: 1.1; }
+    .stat .lbl { font-size: .85rem; color: var(--muted); margin-top: 4px; }
+    @media (max-width: 760px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: none; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    }
+
+    /* ---------- Sections ---------- */
+    section.block { padding: 72px 0 8px; }
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; }
+    .sec-num { font-family: var(--mono); font-size: .85rem; color: var(--accent-2); }
+    h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.7rem, 3.2vw, 2.2rem); letter-spacing: -.01em; }
+    .sec-head .rule { flex: 1; height: 1px; background: var(--line); align-self: center; }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 24px 26px; box-shadow: var(--shadow);
+    }
+    .card + .card { margin-top: 16px; }
+    .card h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.35; }
+    .card .org { color: var(--muted); font-size: .95rem; margin-top: 2px; }
+    .card .meta {
+      font-family: var(--mono); font-size: .8rem; color: var(--muted);
+      white-space: nowrap;
+    }
+    .card-top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+    @media (max-width: 600px) {
+      .card { padding: 20px; }
+      .card-top { flex-direction: column; gap: 6px; }
+    }
+    .card ul { margin: 14px 0 0 18px; }
+    .card li { margin: 4px 0; }
+    .card li::marker { color: var(--accent-2); }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .pill {
+      font-size: .78rem; font-family: var(--mono);
+      background: var(--accent-soft); color: var(--accent);
+      padding: 3px 9px; border-radius: 6px;
+    }
+    .tag-now {
+      display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .03em;
+      text-transform: uppercase; color: #fff; background: var(--accent-2);
+      padding: 2px 8px; border-radius: 5px; margin-left: 8px; vertical-align: 2px;
+    }
+    .sub { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; margin-top: 16px; }
+    .inline-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: .9rem; font-weight: 500; }
+    .inline-links a { display: inline-flex; align-items: center; gap: 5px; }
+    .inline-links svg { width: 14px; height: 14px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
+    .about-grid p + p { margin-top: 12px; }
+    .facts { list-style: none; }
+    .facts li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: .93rem; }
+    .facts li:last-child { border-bottom: none; }
+    .facts span:first-child { color: var(--muted); }
+    .facts span:last-child { text-align: right; font-weight: 500; }
+    @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 26px; }
+    .timeline::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+    .tl-item { position: relative; }
+    .tl-item + .tl-item { margin-top: 16px; }
+    .tl-item::before {
+      content: ""; position: absolute; left: -26px; top: 28px; width: 14px; height: 14px;
+      border-radius: 50%; background: var(--bg); border: 3px solid var(--accent);
+    }
+    .tl-item.current::before { background: var(--accent-2); border-color: var(--accent-2); }
+
+    /* Research / metrics */
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+    .metric { background: var(--surface-2); border-radius: 10px; padding: 14px 16px; }
+    .metric .v { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--accent-2); }
+    .metric .k { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+    @media (max-width: 520px) { .metrics { grid-template-columns: 1fr; } }
+
+    /* Projects grid */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-2 .card + .card { margin-top: 0; }
+    @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+    .proj-icon {
+      width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft);
+      color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    }
+    .proj-icon svg { width: 20px; height: 20px; }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skills .card + .card { margin-top: 0; }
+    .skills h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    @media (max-width: 860px) { .skills { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .skills { grid-template-columns: 1fr; } }
+
+    /* Honors */
+    .honors { list-style: none; }
+    .honors li { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+    .honors li:last-child { border-bottom: none; }
+    .honors .yr { font-family: var(--mono); font-size: .82rem; color: var(--accent-2); min-width: 74px; }
+
+    /* Languages */
+    .lang-bar { height: 8px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+    .lang-bar span { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+
+    /* Contact */
+    .contact {
+      background: var(--accent); color: var(--bg); border-radius: 20px;
+      padding: 48px 40px; text-align: center; margin-top: 8px;
+    }
+    .contact h2 { color: var(--bg); }
+    .contact p { opacity: .85; max-width: 52ch; margin: 12px auto 0; }
+    .contact .btn { margin-top: 24px; background: var(--bg); color: var(--accent); border-color: var(--bg); font-size: 1rem; }
+    .contact .mail { display: block; margin-top: 14px; font-family: var(--mono); font-size: .9rem; color: var(--bg); opacity: .85; word-break: break-all; }
+    @media (max-width: 600px) { .contact { padding: 36px 20px; } }
+
+    footer { padding: 40px 0 48px; color: var(--muted); font-size: .85rem; text-align: center; }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+    .hide { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ======================= NAV ======================= -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="brand">Sadiul Arefin Rafi<span>.</span></a>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#honors">Honors</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div style="display:flex;gap:8px">
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ======================= HERO ======================= -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">NLP · Machine Learning · Teaching</p>
+          <h1>Sadiul Arefin Rafi</h1>
+          <p class="lead">
+            Master's student in <strong>Data, Knowledge and Hybrid Artificial Intelligence (DKAI)</strong> at
+            <a href="https://www.universite-paris-saclay.fr/en/education/master/computer-science/m1-data-knowledge-and-hybrid-artificial-intelligence-dkai" target="_blank" rel="noopener">Université Paris-Saclay</a>.
+            I work on natural language processing, with research in abstractive summarization and complex named entity recognition,
+            and two years of experience teaching algorithms, programming and discrete mathematics at BRAC University.
+          </p>
+          <div class="badges">
+            <span class="badge"><span class="dot"></span>Based in France · Authorized to work in France</span>
+            <span class="badge">🎓 M1 DKAI, Paris-Saclay</span>
+          </div>
+          <div class="cta">
+            <a class="btn primary" href="mailto:sadiularefinrafi@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              Get in touch
+            </a>
+            <a class="btn" data-link="cv" href="cv.pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+              Download CV
+            </a>
+            <a class="btn" href="#research">View research</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <!--
+            ===== PROFILE PHOTO =====
+            Upload your photo to the repository root and name it "profile.jpg"
+            (or change the src below). A square image of at least 600×600 px works best.
+            Until a photo is added, your initials are shown instead.
+          -->
+          <div class="photo" id="photo">
+            <img src="profile.jpg" alt="Portrait of Sadiul Arefin Rafi" onerror="this.parentElement.classList.add('missing')" />
+            <div class="initials" aria-hidden="true">SR</div>
+          </div>
+          <div class="socials">
+            <a href="mailto:sadiularefinrafi@gmail.com" aria-label="Email" title="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            </a>
+            <a data-link="scholar" href="#" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+            </a>
+            <a data-link="github" href="#" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            </a>
+            <a data-link="linkedin" href="#" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            </a>
+            <a data-link="leetcode" href="#" target="_blank" rel="noopener" aria-label="LeetCode" title="LeetCode">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.48 0a1.37 1.37 0 0 0-.96.44L7.12 6.21l-2.9 3.11a5.3 5.3 0 0 0-1.27 2.11 5.6 5.6 0 0 0-.05 3.13c.13.5.34.98.61 1.43.27.46.6.88.98 1.25l4.73 4.73c1.1 1.1 2.53 1.67 3.98 1.66 1.45 0 2.88-.57 3.98-1.67l2.44-2.44a1.37 1.37 0 1 0-1.94-1.94l-2.44 2.44c-.6.6-1.32.87-2.04.87s-1.44-.27-2.04-.87l-4.73-4.73a2.9 2.9 0 0 1-.72-1.2 2.85 2.85 0 0 1 .02-1.6c.12-.4.33-.75.62-1.06l2.9-3.11 5.4-5.77A1.37 1.37 0 0 0 13.48 0zm-2.86 13.08a1.37 1.37 0 1 0 0 2.74h9.73a1.37 1.37 0 1 0 0-2.74z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap" style="margin-top:48px">
+        <div class="stats reveal">
+          <div class="stat"><div class="num">3.93</div><div class="lbl">CGPA / 4.0, BSc CS</div></div>
+          <div class="stat"><div class="num">2 yrs</div><div class="lbl">Adjunct Lecturer, BRAC University</div></div>
+          <div class="stat"><div class="num">+15.25%</div><div class="lbl">ROUGE-2 gain, thesis</div></div>
+          <div class="stat"><div class="num">300+</div><div class="lbl">Problems solved online</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ABOUT ======================= -->
+    <section class="block" id="about">
+      <div class="wrap">
+        <div class="sec-head"><span class="sec-num">01</span><h2>About</h2><span class="rule"></span></div>
+        <div class="about-grid">
+          <div class="card reveal">
+            <p>
+              I'm a computer scientist focused on <strong>natural language processing</strong> and <strong>machine learning</strong>.
+              I graduated from <a href="https://www.bracu.ac.bd/" target="_blank" rel="noopener">BRAC University</a> with a CGPA of 3.93/4.0,
+              where my thesis fine-tuned PEGASUS for abstractive summarization on the XL-Sum corpus and outperformed the mT5 baseline
+              along with BART, T5 and the base PEGASUS model.
+            </p>
+            <p>
+              After graduating, I spent two years as an Adjunct Lecturer at BRAC University, teaching programming,
+              algorithm analysis and discrete mathematics. In September 2026 I moved to France to begin the
+              <a href="https://www.universite-paris-saclay.fr/en/education/master/computer-science/m1-data-knowledge-and-hybrid-artificial-intelligence-dkai" target="_blank" rel="noopener">M1 DKAI</a>
+              programme at Université Paris-Saclay, which combines data science with hybrid AI: machine learning alongside symbolic reasoning.
+            </p>
+            <p>
+              I'm open to internships, research assistantships and collaborations in NLP, data science and AI.
+            </p>
+          </div>
+          <div class="card reveal">
+            <ul class="facts">
+              <li><span>Current</span><span>M1 DKAI, Université Paris-Saclay</span></li>
+              <li><span>Location</span><span>France</span></li>
+              <li><span>Work status</span><span>Authorized to work in France</span></li>
+              <li><span>Nationality</span><span>Bangladeshi</span></li>
+              <li><span>Languages</span><span>Bengali (native), English (C1)</span></li>
+              <li><span>Email</span><span><a href="mailto:sadiularefinrafi@gmail.com">sadiularefinrafi@gmail.com</a></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= EDUCATION ======================= -->
+    <section class="block" id="education">
+      <div class="wrap">
+        <div class="sec-head"><span class="sec-num">02</span><h2>Education</h2><span class="rule"></span></div>
+        <div class="timeline">
+
+          <div class="tl-item current reveal">
+            <div class="card">
+              <div class="card-top">
+                <div>
+                  <h3>Master's in Computer Science, M1 Data, Knowledge and Hybrid Artificial Intelligence (DKAI)<span class="tag-now">Current</span></h3>
+                  <div class="org"><a href="https://www.universite-paris-saclay.fr/en" target="_blank" rel="noopener">Université Paris-Saclay</a>, France</div>
+                </div>
+                <span class="meta">Sept 2026 – Present</span>
+              </div>
+              <p style="margin-top:12px">
+                A two-year, English-taught programme combining data science and artificial intelligence, closely linked to research
+                in the Paris-Saclay laboratories.
+              </p>
+              <div class="inline-links">
+                <a href="https://www.universite-paris-saclay.fr/en/education/master/computer-science/m1-data-knowledge-and-hybrid-artificial-intelligence-dkai" target="_blank" rel="noopener">
+                  Programme page
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="card">
+              <div class="card-top">
+                <div>
+                  <h3>Bachelor of Science in Computer Science</h3>
+                  <div class="org"><a href="https://www.bracu.ac.bd/" target="_blank" rel="noopener">BRAC University</a>, Dhaka, Bangladesh</div>
+                </div>
+                <span class="meta">Jan 2020 – Sept 2023</span>
+              </div>
+              <div class="pill-row">
+                <span class="pill">CGPA 3.93 / 4.0</span>
+                <span class="pill">VC's Honor List ×5</span>
+                <span class="pill">Dean's Honor List ×1</span>
+              </div>
+              <p class="sub">Thesis</p>
+              <p><a href="#research">Optimizing Abstractive Summarization With Fine-Tuned PEGASUS</a></p>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="card">
+              <div class="card-top">
+                <div>
+                  <h3>Higher Secondary Certificate (HSC)</h3>
+                  <div class="org">Cox's Bazar Government College</div>
+                </div>
+                <span class="meta">2019</span>
+              </div>
+              <div class="pill-row"><span class="pill">GPA 4.58 / 5.0</span></div>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="card">
+              <div class="card-top">
+                <div>
+                  <h3>Secondary School Certificate (SSC)</h3>
+                  <div class="org">Cox's Bazar Model High School</div>
+                </div>
+                <span class="meta">2017</span>
+              </div>
+              <div class="pill-row"><span class="pill">GPA 5.0 / 5.0</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= EXPERIENCE ======================= -->
+    <section class="block" id="experience">
+      <div class="wrap">
+        <div class="sec-head"><span class="sec-num">03</span><h2>Experience</h2><span class="rule"></span></div>
+        <div class="timeline">
+
+          <div class="tl-item reveal">
+            <div class="card">
+              <div class="card-top">
+                <div>
+                  <h3>Adjunct Lecturer</h3>
+                  <div class="org">Department of Computer Science &amp; Engineering, <a href="https://www.bracu.ac.bd/" target="_blank" rel="noopener">BRAC University</a>, Dhaka</div>
+                </div>
+                <span class="meta">Oct 2024 – Sept 2026 · 2 yrs</span>
+              </div>
+              <p class="sub">Courses taught</p>
+              <div class="pill-row" style="margin-top:8px">
+                <span class="pill">CSE110 · Programming Language I (Lab)</span>
+                <span class="pill">CSE221 · Algorithm Analysis &amp; Design (Theory + Lab)</span>
+                <span class="pill">CSE230 · Discrete Mathematics (Theory)</span>
+              </div>
+              <p class="sub">Responsibilities</p>
+              <ul style="margin-top:6px">
+                <li>Delivered theory and lab lectures across three undergraduate core courses.</li>
+                <li>Designed and graded quizzes, midterms and final examinations.</li>
+                <li>Produced lab video content for CSE221 (Algorithm Analysis &amp; Design).</li>
+                <li>Held consultation hours and provided one-to-one academic support to students.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="card">
+              <div class="card-top">
+                <div>
+                  <h3>Undergraduate Teaching Assistant</h3>
+                  <div class="org"><a href="https://www.bracu.ac.bd/" target="_blank" rel="noopener">BRAC University</a>, Dhaka</div>
+                </div>
+                <span class="meta">Sept 2022 – Sept 2023 · 1 yr</span>
+              </div>
+              <ul>
+                <li>Graded assessments and ran personalized consultations to support student learning and performance.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= RESEARCH ======================= -->
+    <section class="block" id="research">
+      <div class="wrap">
+        <div class="sec-head"><span class="sec-num">04</span><h2>Research</h2><span class="rule"></span></div>
+        <div class="card reveal">
+          <div class="card-top">
+            <div>
+              <p class="eyebrow" style="margin-bottom:6px">Bachelor's Thesis</p>
+              <h3 style="font-family:var(--serif);font-size:1.45rem">Optimizing Abstractive Summarization With Fine-Tuned PEGASUS</h3>
+              <div class="org">BRAC University, 2023</div>
+            </div>
+          </div>
+          <p style="margin-top:14px">
+            Fine-tuned <a href="https://github.com/google-research/pegasus" target="_blank" rel="noopener">PEGASUS</a> on the English portion of the
+            <a href="https://github.com/csebuetnlp/xl-sum" target="_blank" rel="noopener">XL-Sum</a> corpus for abstractive text summarization.
+            The fine-tuned model outperformed the mT5 baseline as well as other transformer models (BART, T5 and base PEGASUS),
+            achieving state-of-the-art results on the benchmark.
+          </p>
+          <div class="metrics">
+            <div class="metric"><div class="v">+4.04%</div><div class="k">ROUGE-1</div></div>
+            <div class="metric"><div class="v">+15.25%</div><div class="k">ROUGE-2</div></div>
+            <div class="metric"><div class="v">+3.39%</div><div class="k">ROUGE-L</div></div>
+          </div>
+          <div class="pill-row">
+            <span class="pill">Abstractive summarization</span><span class="pill">Transformers</span>
+            <span class="pill">PEGASUS</span><span class="pill">XL-Sum</span><span class="pill">ROUGE</span>
+          </div>
+          <div class="inline-links">
+            <a data-link="thesis" href="#" target="_blank" rel="noopener">Read the thesis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+            <a data-link="scholar" href="#" target="_blank" rel="noopener">Google Scholar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= PROJECTS ======================= -->
+    <section class="block" id="projects">
+      <div class="wrap">
+        <div class="sec-head"><span class="sec-num">05</span><h2>Projects</h2><span class="rule"></span></div>
+        <div class="grid-2">
+
+          <div class="card reveal">
+            <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg></div>
+            <h3>PEGASUS × XL-Sum</h3>
+            <p class="org">Abstractive summarization</p>
+            <ul>
+              <li>Coordinated and led fine-tuning of PEGASUS on the XL-Sum corpus, reaching state-of-the-art summarization performance.</li>
+              <li>Surpassed previous benchmarks with significant ROUGE improvements through careful experiment design and testing.</li>
+            </ul>
+            <div class="pill-row"><span class="pill">PyTorch</span><span class="pill">Transformers</span><span class="pill">NLP</span></div>
+            <div class="inline-links">
+              <a data-link="pegasusRepo" href="#" target="_blank" rel="noopener">Source code <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+              <a href="https://github.com/csebuetnlp/xl-sum" target="_blank" rel="noopener">XL-Sum dataset <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
+            <h3>SemEval 2023: MultiCoNER II</h3>
+            <p class="org">Complex named entity recognition</p>
+            <ul>
+              <li>Built a NER model with BERT, scikit-learn and pandas to identify complex, fine-grained entities.</li>
+              <li>Reached an <strong>F1 score of 0.84</strong> on English through careful model tuning and data preprocessing.</li>
+            </ul>
+            <div class="pill-row"><span class="pill">BERT</span><span class="pill">scikit-learn</span><span class="pill">pandas</span><span class="pill">Python</span></div>
+            <div class="inline-links">
+              <a data-link="semevalRepo" href="#" target="_blank" rel="noopener">Source code <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+              <a href="https://multiconer.github.io/" target="_blank" rel="noopener">Shared task <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Certificate -->
+        <div class="card reveal" style="margin-top:16px">
+          <div class="card-top">
+            <div>
+              <p class="eyebrow" style="margin-bottom:6px">Certificate</p>
+              <h3>Machine Learning Engineer, Collaborative AI Project</h3>
+              <div class="org"><a href="https://www.omdena.com/" target="_blank" rel="noopener">Omdena</a></div>
+            </div>
+            <a class="btn" data-link="omdena" href="#" target="_blank" rel="noopener" style="white-space:nowrap">View certificate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= SKILLS ======================= -->
+    <section class="block" id="skills">
+      <div class="wrap">
+        <div class="sec-head"><span class="sec-num">06</span><h2>Technical Skills</h2><span class="rule"></span></div>
+        <div class="skills">
+          <div class="card reveal"><h3>Languages</h3><div class="pill-row"><span class="pill">Python</span><span class="pill">Java</span></div></div>
+          <div class="card reveal"><h3>ML / DL Frameworks</h3><div class="pill-row"><span class="pill">PyTorch</span><span class="pill">TensorFlow</span></div></div>
+          <div class="card reveal"><h3>Web Framework</h3><div class="pill-row"><span class="pill">Django</span></div></div>
+          <div class="card reveal"><h3>Libraries</h3><div class="pill-row"><span class="pill">scikit-learn</span><span class="pill">NumPy</span><span class="pill">pandas</span><span class="pill">spaCy</span><span class="pill">NLTK</span></div></div>
+          <div class="card reveal"><h3>Visualization</h3><div class="pill-row"><span class="pill">Matplotlib</span><span class="pill">seaborn</span></div></div>
+          <div class="card reveal"><h3>Data &amp; Tools</h3><div class="pill-row"><span class="pill">MySQL</span><span class="pill">Git / GitHub</span></div></div>
+        </div>
+        <div class="card reveal" style="margin-top:16px">
+          <h3 style="font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">Research interests</h3>
+          <div class="pill-row">
+            <span class="pill">Natural Language Processing</span><span class="pill">Text Summarization</span>
+            <span class="pill">Named Entity Recognition</span><span class="pill">Transformers &amp; LLMs</span>
+            <span class="pill">Hybrid AI</span><span class="pill">Data Science</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= HONORS ======================= -->
+    <section class="block" id="honors">
+      <div class="wrap">
+        <div class="sec-head"><span class="sec-num">07</span><h2>Honors &amp; Awards</h2><span class="rule"></span></div>
+        <div class="card reveal">
+          <ul class="honors">
+            <li><span class="yr">2020–23</span><span><strong>Vice Chancellor's Honor List</strong>, awarded 5 times, BRAC University</span></li>
+            <li><span class="yr">2020–23</span><span><strong>Dean's Honor List</strong>, BRAC University</span></li>
+            <li><span class="yr">2019</span><span><strong>5th place</strong>, Bangladesh Regional Physics Olympiad</span></li>
+            <li><span class="yr">2018</span><span><strong>10th place</strong>, Bangladesh Regional Physics Olympiad</span></li>
+            <li><span class="yr">2017</span><span><strong>25th place</strong>, Bangladesh Regional Physics Olympiad</span></li>
+            <li><span class="yr">Ongoing</span><span><strong>300+ problems solved</strong> on online judges · <a data-link="leetcode" href="#" target="_blank" rel="noopener">LeetCode profile</a></span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= LANGUAGES ======================= -->
+    <section class="block" id="languages">
+      <div class="wrap">
+        <div class="sec-head"><span class="sec-num">08</span><h2>Languages</h2><span class="rule"></span></div>
+        <div class="grid-2">
+          <div class="card reveal">
+            <div class="card-top"><h3>Bengali</h3><span class="meta">Native</span></div>
+            <div class="lang-bar"><span style="width:100%"></span></div>
+          </div>
+          <div class="card reveal">
+            <div class="card-top"><h3>English</h3><span class="meta">CEFR C1 · IELTS 7.0</span></div>
+            <div class="lang-bar"><span style="width:85%"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CONTACT ======================= -->
+    <section class="block" id="contact">
+      <div class="wrap">
+        <div class="contact reveal">
+          <h2>Let's work together</h2>
+          <p>I'm based in France and authorized to work here. I'm open to internships, research roles and collaborations in NLP, machine learning and data science.</p>
+          <a class="btn" href="mailto:sadiularefinrafi@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            Send me an email
+          </a>
+          <a class="mail" href="mailto:sadiularefinrafi@gmail.com">sadiularefinrafi@gmail.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="yr"></span> Sadiul Arefin Rafi · Built for GitHub Pages</div>
+  </footer>
+
+  <script>
+    /* ================================================================
+       YOUR LINKS: paste your URLs here.
+       Any link left as "" is hidden automatically on the site.
+       ================================================================ */
+    const LINKS = {
+      scholar:     "",          // Google Scholar profile URL
+      github:      "",          // e.g. "https://github.com/your-username"
+      linkedin:    "",          // e.g. "https://www.linkedin.com/in/your-handle"
+      leetcode:    "",          // e.g. "https://leetcode.com/u/your-handle"
+      thesis:      "",          // link to thesis PDF / BRAC University repository page
+      pegasusRepo: "",          // GitHub repo for the PEGASUS XL-Sum project
+      semevalRepo: "",          // GitHub repo for the SemEval MultiCoNER II project
+      omdena:      "",          // Omdena certificate URL
+      cv:          "cv.pdf"     // upload your CV as cv.pdf in the repo root (or set "" to hide)
+    };
+
+    document.querySelectorAll("[data-link]").forEach(el => {
+      const url = LINKS[el.dataset.link];
+      if (url) { el.href = url; }
+      else {
+        // hide the link (and an empty wrapper row, if any)
+        const li = el.closest(".honors li");
+        if (li) { el.replaceWith(document.createTextNode("")); }
+        else { el.classList.add("hide"); }
+      }
+    });
+
+    // Year in footer
+    document.getElementById("yr").textContent = new Date().getFullYear();
+
+    // Theme toggle (remembered per browser)
+    const root = document.documentElement;
+    try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", () => {
+      const dark = root.dataset.theme
+        ? root.dataset.theme === "dark"
+        : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+    });
+
+    // Mobile menu
+    const nav = document.getElementById("navLinks");
+    document.getElementById("menuBtn").addEventListener("click", () => nav.classList.toggle("open"));
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    // Active nav link while scrolling
+    const sections = [...document.querySelectorAll("section[id]")];
+    const links = [...nav.querySelectorAll("a")];
+    window.addEventListener("scroll", () => {
+      let cur = "";
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+      links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + cur));
+    }, { passive: true });
+  </script>
+</body>
+</html>
